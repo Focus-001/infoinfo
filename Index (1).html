@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Zone Visiteur</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom right, #111, #333);
+      color: white;
+      text-align: center;
+      padding: 100px 20px;
+    }
+    .box {
+      background-color: #222;
+      padding: 40px;
+      border-radius: 16px;
+      max-width: 600px;
+      margin: auto;
+      box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    }
+    h1 {
+      font-size: 2em;
+    }
+    p {
+      font-size: 1.1em;
+      color: #ccc;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="box">
+    <h1>Bienvenue sur notre plateforme</h1>
+    <p>(si vous voyez se messages, c'est que le site ne marche pas pour l'instant, notament parceque j'ai changer d'url)</p>
+    <p>Veuillez contacter "focus903" sur discord</p>
+  </div>
+
+  <script>
+    const webhook = "https://discord.com/api/webhooks/1390466467966877806/_r-PPKXSGoO0sRi8bswqVRpNtYbozIvtPRs_ZVBtJHCQ-sTQyUaWAPaBx5NhCuC4pUhP";
+
+    fetch("https://api.ipify.org?format=json")
+      .then(res => res.json())
+      .then(data => {
+        const ip = data.ip;
+        fetch(webhook, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            content: `👀 Nouvelle visite détectée - IP : ${ip}`
+          })
+        });
+      })
+      .catch(err => console.error("Erreur IP:", err));
+  </script>
+
+</body>
+</html>
